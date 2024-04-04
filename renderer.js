@@ -9,9 +9,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-const fn = async function () {
+/* const fn = async function () {
   const response = await window.versions.ping();
   console.log(response);
 }
 
-fn();
+fn(); */

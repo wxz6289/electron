@@ -1,36 +1,22 @@
 {
-  "version": "0.2.0",
-  "compounds": [
-    {
-      "name": "Main + Renderer",
-      "configurations": ["Main", "Renderer"],
-      "stopAll": true
-    }
-  ],
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.0.0",
   "configurations": [
     {
       "type": "node",
       "request": "launch",
-      "name": "Main",
+      "name": "Debug Electron Main Process",
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
       "windows": {
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
-      "args": [".", "--remote-debugging-port=9222"],
-      "outputCapture": "std",
-      "console": "integratedTerminal",
+      "args": ".",
       "skipFiles": [
         "<node_internals>/**"
-      ],
-      // "program": "${workspaceFolder}/main.js"
-    },
-    {
-      "name": "Renderer",
-      "port": 9222,
-      "request": "attach",
-      "type": "chrome",
-      "webRoot": "${workspaceFolder}"
+      ]
     }
   ]
 }

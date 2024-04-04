@@ -4,37 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-    <style>
-        body {
-            background-image: linear-gradient(45deg, #EAD790 0%, #EF8C53 100%);
-            text-align: center;
-        }
-
-        button {
-            background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0px 0px 4px 0px rgba(0,0,0, 0.50);
-            border-radius: 8px;
-            padding: 1em 2em;
-            border: none;
-            font-family: "Roboto", sans-serif;
-            font-weight: 100;
-            font-size: 14pt;
-            position: relative;
-            top: 50%;
-            cursor: pointer;
-            outline: none;
-        }
-        button:hover {
-            background: rgba(0, 0, 0, 0.30);
-        }
-    </style>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src * " />
+    <link rel="stylesheet" href="./src/styles/main.css" type="text/css"/>
     <title>Electron</title>
 </head>
 <body>
-    我们正在使用 Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    和 Electron <span id="electron-version"></span>.
-    <script src="./renderer.js"></script>
+    <section class="add-new-link">
+        <form class="new-link-form">
+            <input type="url" class="new-link-url" placeholder="URL" size="100" required/>
+            <input type="submit" class="new-link-submit" value="确定" disabled/>
+        </form>
+    </section>
+    <div class="error-message"></div>
+
+    <section class="links"></section>
+    <section class="controls">
+        <button class="clear-storage">清空</button>
+    </section>
+    <script src="./src/bookmarker.js"></script>
 </body>
 </html>

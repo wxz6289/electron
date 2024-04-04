@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'"/>
+  <title>FireSale</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="container">
+  <section class="controls">
+    <button id="new">新建</button>
+    <button id="open">打开文件</button>
+    <button id="save-markdown" disabled>保存</button>
+    <button id="revert" disabled>撤回</button>
+    <button id="saveHtml">保存HTML</button>
+    <button id="show">预览</button>
+    <button id="default">默认</button>
+  </section>
+  <section class="content">
+    <label for="markdown" hidden="hidden"> Markdown 内容</label>
+    <textarea name="markdown" id="markdown" cols="30" rows="10" class="raw-markdown"></textarea>
+    <div class="rendered-html" id="html"></div>
+  </section>
+<script src="./renderer.js"></script>
+</body>
+</html>

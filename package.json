@@ -2,9 +2,10 @@
   "name": "learn-electron",
   "version": "1.0.0",
   "description": "learn electron",
-  "main": "main.js",
+  "main": "./firesale/app/main.js",
   "scripts": {
     "start": "electron .",
+    "dev": "nodemon --exec 'electron .'",
     "publish": "electron-forge import && electron-forge make",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +24,11 @@
   "homepage": "https://github.com/DreamerKing/learn-electron#readme",
   "devDependencies": {
     "@electron-forge/cli": "^6.2.1",
-    "electron": "^25.2.0"
+    "electron": "^25.2.0",
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "marked": "^12.0.1"
   }
 }
