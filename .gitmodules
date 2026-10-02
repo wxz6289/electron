@@ -1,0 +1,6 @@
+[submodule "clipmaster"]
+	path = clipmaster
+	url = git@github.com:wxz6289/clipmaster.git
+[submodule "start"]
+	path = start
+	url = git@github.com:wxz6289/start.git
