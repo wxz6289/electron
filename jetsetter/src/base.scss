@@ -1,0 +1,49 @@
+$accent-color: rgb(244, 46, 92);
+$text-color: #000;
+
+html {
+  box-sizing: border-box;
+  color: white;
+}
+
+body, input {
+  font: caption;
+}
+.application {
+  margin: 2em;
+}
+
+input {
+  padding: 0.5em;
+  border: 1px solid $accent-color;
+  background-color: lighten($accent-color, 30);
+}
+.new-iten-submit {
+  margin-left: 1em;
+  padding: 0.2em;
+  border-radius: 6px;
+}
+
+button, .button, input[type="submit"] {
+  background-color: $accent-color;
+  border: 1px solid darken($color: $accent-color, $amount: 10);
+  border-radius: 2px;
+  color: lighten($color: $text-color, $amount: 20);
+  padding: 0.5em;
+  &:hover {
+    background-color: lighten($color: $accent-color, $amount: 10);
+  }
+  &:active {
+    background-color: lighten($color: $accent-color, $amount: 5);
+  }
+  &.full-width {
+    width: 100%;
+    margin: 1em 0;
+  }
+  .new-item {
+    display: flex;
+  }
+  .new-item-input{
+    width: 100%;
+  }
+}

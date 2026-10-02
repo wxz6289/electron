@@ -11,12 +11,13 @@ window.addEventListener('load', () => {
   });
 
   ipcRenderer.on('reply', (e, msg) => {
-    console.log('this is from renderer reply', e, msg);
+    console.log('this is from renderer reply', msg);
   })
 
   syncBtn.addEventListener('click', () => {
     const respose = ipcRenderer.sendSync('syncMsg', 'this is from renderer sync');
     console.log(respose, '< this is from main thread sync');
+    ipcRenderer.send('open', 'fuck');
   });
 
   ipcRenderer.on('open', (e, msg) => {

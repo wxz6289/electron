@@ -14,12 +14,12 @@ const createWindow = () => {
             contextIsolation: false
         }
     })
-    win.webContents.loadFile('index.html')
+    win.webContents.loadFile('./ipc.html')
     win.openDevTools();
     // console.log(win.webContents.isDevToolsOpened())
     // console.log(Object.getPrototypeOf(win.webContents), 'webContents', Object.getPrototypeOf(win))
     // require('../menu.js');
-    // require('../ipcMain.js');
+    require('./ipcMain.js');
 
     // win.loadURL('http://localhost:8080/')
 }
@@ -45,13 +45,13 @@ app.on('window-all-closed', () => {
     }
     })
     .on('browser-window-focus', (e) => {
-        console.log('focus > ', e);
+       // console.log('focus > ', e);
     })
     .on('browser-window-blur', (e) => {
-        console.log('blur: ', e);
+        // console.log('blur: ', e);
     })
     .on('before-quit', e => {
-        console.log('before quit >', e)
+        // console.log('before quit >', e)
     })
     .on('error', (e) => {
     console.error(e);

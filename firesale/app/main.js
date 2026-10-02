@@ -1,6 +1,6 @@
-const { app, BrowserWindow, dialog } = require('electron');
+const { app, ipcMain, shell, BrowserWindow, Menu, dialog } = require('electron');
 const { readFile, writeFile, watch: watchFile } = require('node:fs/promises');
-const { basename } = require('node:path');
+const createAppMenu = require('./app-menu');
 
 require('@electron/remote/main').initialize()
 
@@ -29,6 +29,8 @@ const createWindow = () => {
   require("@electron/remote/main").enable(win.webContents);
   win.webContents.loadFile('./firesale/app/index.html');
 
+  win.on('focus', createAppMenu);
+
   win.once('ready-to-show', () => {
     win.show();
     // getFileFromUser();
@@ -51,9 +53,10 @@ const createWindow = () => {
     }
   }))
     .on('closed', () => {
-    windowSet.delete(win);
-    stopWatchingFile(win);
-    win = null;
+      windowSet.delete(win);
+      stopWatchingFile(win);
+      createAppMenu();
+      win = null;
   });
   windowSet.add(win);
   return win;
@@ -98,6 +101,7 @@ const openFile = async (tragetWindow, filePath) => {
   app.addRecentDocument(filePath); // 向系统添加最近打开文档
   tragetWindow.setRepresentedFilename(filePath);
   tragetWindow.webContents.send('file-opened', filePath, content);
+  createAppMenu();
   startWatchingFile(tragetWindow, filePath)
 }
 
@@ -119,14 +123,28 @@ const saveHtml =  async (tragetWindow, content) => {
   // }
 }
 
-const saveMarkdown = async (tragetWindow, filePath, content) => {
+const saveMarkdown = async (targetWindow, filePath, content) => {
+  if (!filePath) {
+    const result = await dialog.showSaveDialog(targetWindow, {
+      title: '保存文件',
+      message: '保存新建文件',
+      defaultPath: app.getPath('documents'),
+      filters: [
+        { name: "Markdown Files", extensions: ['md', 'markdown'] }
+      ]
+    });
+    if (result.canceled) return;
+    filePath = result.filePath;
+  }
+  console.log(content, filePath, 'save')
   await writeFile(filePath, content);
-  tragetWindow.webContents.send('save-markdown', true);
+  targetWindow.webContents.send('save-markdown-success', true);
 }
 
 
 
 app.whenReady().then(() => {
+  Menu.setApplicationMenu(createAppMenu());
   createWindow();
   // 窗口无法在 ready 事件前创建
   app.on('activate', (event, hasVisibleWindows) => { // 仅MacOS触发activate事件
@@ -155,9 +173,15 @@ app.on('will-finish-launching', () => {
 })
   .on('error', (e) => {
   console.error(e);
-});
+  });
+
+ipcMain.on('showItemInFolder', (e, filePath) => {
+  console.log('showItemInFolder click');
+  shell.showItemInFolder(filePath);
+})
 
 module.exports = {
+  Menu,
   createWindow,
   getFileFromUser,
   openFile,

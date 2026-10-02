@@ -10,6 +10,11 @@ ipcMain.on('syncMsg', (e, msg) => {
   e.returnValue = '主进程收到！';
 });
 
+ipcMain.on('open', (e, msg) => {
+  console.log('open: > ', msg);
+  e.sender.send('open', 'bitch');
+})
+
 ipcMain.on('show-context-menu', (event) => {
   console.log(event, 'show-context-menu');
   const template = [{
